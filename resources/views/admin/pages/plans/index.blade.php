@@ -4,7 +4,11 @@
 @section('title', 'Planos')
 
 @section('content_header')
-    <h1>Planos </h1> 
+    <h1>Planos </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a href="{{ route('admin.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active" > <a href="{{ route('plans.index') }}" class="">Planos</a></li>
+    </ol> 
 @stop
 
 @section('content')
@@ -12,9 +16,9 @@
         <div class="card-header">
             <form action="{{route('plans.search')}}" method="POST" class="form form-inline">
                 @csrf
-                <input type="text" name="filter" placeholder="Digite o Nome!!" class="form-control" value="{{$filters['filter'] ?? '' }}">
+                <input type="text" name="filter" placeholder="Digite a pesquisa !!" class="form-control" value="{{$filters['filter'] ?? '' }}">
                     <button type="submit" class="btn btn-dark"> Filtrar </button>
-                    <a href="{{ route('plans.create') }}" class="btn btn-dark">Novo Plano</a>
+                    <a href="{{ route('plans.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> Novo Plano</a>
             </form>
         </div>
         <div class="card-body">
@@ -25,7 +29,7 @@
                         <th>Preço</th>
                         <th>Descrição Plano</th>
                         <th>URL</th>
-                        <th width="50">Ações</th>                        
+                        <th width="150">Ações</th>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +39,7 @@
                             <td>R$ {{ number_format($plan->price,2,',','.') }}</td>
                             <td>{{ $plan->description }}</td>                            
                             <td>{{ $plan->url }}</td>                            
-                            <td><a href="{{route('plans.show',$plan->url)}}" class="btn btn-warning">Detalhes</a></td>
+                            <td><a href="{{route('plans.show',$plan->url)}}" class="btn btn-warning"><i class="fas fa-info"></i> Detalhes</a></td>
                         </tr>
                     @endforeach
                 </tbody>

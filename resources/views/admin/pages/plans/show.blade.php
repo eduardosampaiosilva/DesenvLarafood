@@ -32,8 +32,8 @@
         @method('DELETE')
 
         <div class="form-group" >
-                <a href="{{ route('plans.index') }}" class="btn btn-dark">Voltar</a>                 
-                <button type="submit" class="btn btn-danger"> Deletar Plano( {{$plan->name }})</button>
+                <a href="{{ route('plans.index') }}" class="btn btn-dark"><i class="far fa-hand-point-left"></i> Voltar</a>                 
+                <button type="submit" class="btn btn-danger"> <i class="far fa-trash-alt"></i> Deletar Plano( {{$plan->name }})</button>
         </div>        
     </form>
 @endsection
