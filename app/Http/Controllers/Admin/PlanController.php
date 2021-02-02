@@ -80,5 +80,34 @@ class PlanController extends Controller
 
     }
 
+    public function edit($url){
+        
+        $plan = $this->repository->where('url', $url)->first();//se url passada encontrar no repository tras somente um 
+
+        if(!$plan)
+           return redirect()->back(); // se nao encontrar o plano volta para a pesquisa     
+        
+
+        return view('admin.pages.plans.edit' , [
+                    'plans' => $plan,            
+        ]); 
+
+    }
+
+    public function update(Request $request, $url){
+
+        $plan = $this->repository->where('url', $url)->first();//se url passada encontrar no repository tras somente um 
+
+        if(!$plan)
+           return redirect()->back(); // se nao encontrar o plano volta para a pesquisa             
+
+        //dd($request->all());
+
+        $plan->update($request->all());
+
+        return redirect()->route('plans.index');
+
+    }
+
 }
                                
