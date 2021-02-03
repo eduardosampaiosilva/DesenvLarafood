@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePlan;
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+
 
 class PlanController extends Controller
 {
@@ -26,12 +27,9 @@ class PlanController extends Controller
         return view('admin.pages.plans.create');
     }
 
-    public function store(Request $request){
+    public function store(StoreUpdatePlan $request){ //passa StoreUpdatePlan ao inves de request para validar os itens
 
-        $data = $request->all();
-        $data['url'] = Str::kebab($request->name);//faz a string pra ser a url
-    
-        $this->repository->create($data); // repository que ele fez juncao com a model Plan no __construct ele que faz a ligação com o banco
+        $this->repository->create($request->all()); // repository que ele fez juncao com a model Plan no __construct ele que faz a ligação com o banco
 
         return redirect()->route('plans.index');             
     }
@@ -94,14 +92,12 @@ class PlanController extends Controller
 
     }
 
-    public function update(Request $request, $url){
+    public function update(StoreUpdatePlan $request, $url){
 
         $plan = $this->repository->where('url', $url)->first();//se url passada encontrar no repository tras somente um 
 
         if(!$plan)
-           return redirect()->back(); // se nao encontrar o plano volta para a pesquisa             
-
-        //dd($request->all());
+           return redirect()->back(); // se nao encontrar o plano volta para a pesquisa                     
 
         $plan->update($request->all());
 

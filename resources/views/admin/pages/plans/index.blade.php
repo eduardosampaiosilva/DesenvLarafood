@@ -29,6 +29,7 @@
                         <th>Preço</th>
                         <th>Descrição Plano</th>
                         <th>URL</th>
+                        <th></th>
                         <th></th>                        
                         <th></th>                        
                     </tr>
@@ -40,8 +41,9 @@
                             <td>R$ {{ number_format($plan->price,2,',','.') }}</td>
                             <td>{{ $plan->description }}</td>                            
                             <td>{{ $plan->url }}</td>                            
-                            <td><a href="{{route('plans.show',$plan->url)}}" class="btn btn-warning"><i class="fas fa-info"></i> Detalhes</a></td>
-                            <td><a href="{{route('plans.edit',$plan->url)}}" class="btn btn-success"><i class="far fa-edit"></i> Editar</a></td>
+                            <td><a href="{{route('details.plan.index',$plan->url)}}" class="btn btn-primary"><i class="fas fa-info"></i> Detalhes</a></td>
+                            <td><a href="{{route('plans.show',$plan->url)}}" class="btn btn-warning"><i class="fas fa-info"></i> Ver</a></td>
+                            <td><a href="{{route('plans.edit',$plan->url)}}" class="btn btn-success"><i class="far fa-edit"></i> Editar</a></td>
                         </tr>
                     @endforeach
                 </tbody>
