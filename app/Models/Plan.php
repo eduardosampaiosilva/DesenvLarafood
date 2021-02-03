@@ -14,6 +14,8 @@ class Plan extends Model
     */
     
     protected $dateFormat = 'd-m-Y H:i:s';
+    
+    public $timestamps = false;
 
     protected $fillable = ['name','url','price','description'];    
 
