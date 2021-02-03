@@ -14,12 +14,18 @@ class Plan extends Model
     */
     
     protected $dateFormat = 'd-m-Y H:i:s';
+    
+    public $timestamps = false;
 
     protected $fillable = ['name','url','price','description'];    
 
+    public function details(){ // faz o relacionamento com o detalhe plano 1 pra muitos
+        return $this->hasMany(DetailPlan::class);
+    }
+
     public function search($filter = null){
         $results = $this->Where('name', 'like',"%{$filter}%")
-                        ->orWhere('description', 'like',"%{$filter}%")
+                        ->orWhere('description', 'like',"%{$filter}%")                                                
                         ->paginate(10);
         return $results;
     }
