@@ -5,9 +5,21 @@ Route::prefix('admin')
        ->group(function(){
 
      /**
-      * Routes Details Plans
+      * Routes para Profile, usando o resource é usado mais para api mas é uma técnia para ser aprendida é mais enxuta
      */
+        
+     Route::resource('profiles','ACL\ProfileController');
+     
+     /**
+      * Routes Details Plans
+     */    
+    Route::delete('plans/{url}/details/{idDetail}','DetailPlanController@destroy')->name('details.plan.destroy');    
+    Route::put('plans/{url}/details/{idDetail}','DetailPlanController@update')->name('details.plan.update');
+    Route::get('plans/{url}/details/{idDetail}/edit','DetailPlanController@edit')->name('details.plan.edit');
     Route::get('plans/{url}/details','DetailPlanController@index')->name('details.plan.index');
+    Route::get('plans/{url}/details/create','DetailPlanController@create')->name('details.plan.create');
+    Route::get('plans/{url}/details/{idDetail}','DetailPlanController@show')->name('details.plan.show');
+    Route::post('plans/{url}/details','DetailPlanController@store')->name('details.plan.store');
 
     /** 
      * Routes Plan

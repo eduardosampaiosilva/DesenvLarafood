@@ -17,6 +17,15 @@
 
 @section('content')
     <div class="card">        
+        <div class="card-header">
+            @include('admin.includes.alerts')
+            <form action="" method="POST" class="form form-inline">
+                @csrf
+                <input type="text" name="filter" placeholder="Digite a pesquisa !!" class="form-control" value="">
+                    <button type="submit" class="btn btn-dark"> Filtrar </button>
+                    <a href="{{ route('details.plan.create', $plan->url) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> Novo Detalhe</a>
+            </form>
+        </div>
         <div class="card-body">
             <table class="table table-condensed">
                 <thead>
@@ -28,8 +37,12 @@
                 <tbody>
                     @foreach($details as $detail)
                         <tr>
-                            <td>{{ $detail->name }}</td>                            
-                            <td><a href="{{route('plans.edit',$plan->url)}}" class="btn btn-success"><i class="far fa-edit"></i> Editar</a></td>
+                            <td>{{ $detail->name }}</td>     
+                            <!-- aqui embaixo é detail pq é dentro do foreach!-->                       
+                            <td>
+                               <a href="{{route('details.plan.edit',[$plan->url, $detail->id])}}" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
+                               <a href="{{route('details.plan.show',[$plan->url, $detail->id])}}" class="btn btn-danger"><i class="far fa-trash-alt"></i> Deletar</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -44,4 +57,4 @@
             
         </div>
     </div>
-@stop
+@endsection

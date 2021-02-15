@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdatePlan extends FormRequest
+class StoreUpdateProfile extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,10 @@ class StoreUpdatePlan extends FormRequest
      */
     public function rules()
     {
-        $url = $this->segment(3);// qual é o campo do link
-        //dd($url);
-
+        $id= $this->segment(3); // pega o codigo do id que esta setado na url 
         return [
-            'name' => "required|min:3|max:255|unique:plans,name,{$url},url",
-            'description' => 'nullable|min:3|max:255',
-            'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
+            'name' => "required|min:3|max:255|unique:profiles,name,{$id},id", // faz  a validação de unique se o name é de outro id(ou seja outro registo)
+            'description' => 'nullable|min:3|max:255',            
         ];
     }
 }

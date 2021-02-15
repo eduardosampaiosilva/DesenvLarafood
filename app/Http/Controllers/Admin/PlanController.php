@@ -47,11 +47,22 @@ class PlanController extends Controller
 
     public function destroy($url){
 
-        $plan = $this->repository->where('url', $url)->first();//se url passada encontrar no repository tras somente um 
+        $plan = $this->repository
+                     ->with('details')
+                     ->where('url', $url)
+                     ->first();//se url passada encontrar no repository tras somente um 
+        
+        //dd($plan->details->count());
 
         if(!$plan)
            return redirect()->back(); // se nao encontrar o plano volta para a pesquisa
         
+        if($plan->details->count() > 0){
+            return redirect()
+                   ->back()
+                   ->with('error','Já existe detalhes vinculados à este plano, caso queira realmente excluir este plano, favor deletar primeiramento do detalhes');
+        }
+
         $plan->delete();
 
         return redirect()->route('plans.index');

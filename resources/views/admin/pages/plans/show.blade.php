@@ -26,6 +26,9 @@
         </ul>        
         </div>        
     </div>    
+    
+    @include('admin.includes.alerts')<!-- Aqui da os alerta caso já tenha algum detalhe cadastrado !-->
+
     <form action="{{route('plans.destroy',$plan->url)}}" method="POST">        
 
         @csrf
